@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const productRoute = require("./routes/product");
+const authRoute = require("./routes/auth");
 
 let mongoDB = process.env.MONGODB_URI;
 mongoose
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
+app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
 
 module.exports = app;
