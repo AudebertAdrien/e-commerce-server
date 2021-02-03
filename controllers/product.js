@@ -1,11 +1,10 @@
 const Product = require("../models/product");
+const fs = require("fs");
 
 exports.createProduct = (req, res, next) => {
   console.log("Create product");
-  const productObject = req.body;
-
   const newProduct = new Product({
-    ...productObject,
+    ...req.body,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${
       req.file.filename
     }`,
@@ -18,7 +17,18 @@ exports.createProduct = (req, res, next) => {
 
 exports.updateProduct = (req, res, next) => {
   console.log("Update product");
-  Product.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+  const productObject = req.file
+    ? {
+        ...req.body,
+        imageUrl: `${req.protocol}://${req.get("host")}/images/${
+          req.file.filename
+        }`,
+      }
+    : { ...req.body };
+  Product.updateOne(
+    { _id: req.params.id },
+    { ...productObject, _id: req.params.id }
+  )
     .then(() => res.status(200).json({ message: "Modified!" }))
     .catch((error) => res.status(400).json({ error }));
 };
@@ -32,14 +42,21 @@ exports.getAllProduct = (req, res, next) => {
 
 exports.getOneProduct = (req, res, next) => {
   console.log("Get one product");
-  Product.findOne({ _id: req.params.id }, { ...req.body })
+  Product.findOne({ _id: req.params.id })
     .then((product) => res.status(200).json({ product }))
     .catch((error) => res.status(400).json({ error }));
 };
 
 exports.deleteProduct = (req, res, next) => {
   console.log("Delete product");
-  Product.deleteOne({ _id: req.params.id })
-    .then(() => res.status(204).json({ message: "Deleted!" }))
-    .catch((error) => res.status(400).json({ error }));
+  Product.findOne({ _id: req.params.id })
+    .then((product) => {
+      const filename = product.imageUrl.split("/images")[1];
+      fs.unlink(`images/${filename}`, () => {
+        Product.deleteOne({ _id: req.params.id })
+          .then(() => res.status(204).json({ message: "Deleted!" }))
+          .catch((error) => res.status(400).json({ error }));
+      });
+    })
+    .catch((error) => res.status(500).json({ error }));
 };

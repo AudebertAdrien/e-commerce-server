@@ -1,11 +1,11 @@
 require("dotenv").config();
+const path = require("path");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const productRoute = require("./routes/product");
 const authRoute = require("./routes/auth");
-
 let mongoDB = process.env.MONGODB_URI;
 mongoose
   .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -26,6 +26,7 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
