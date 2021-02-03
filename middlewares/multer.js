@@ -6,16 +6,21 @@ const MIME_TYPE = {
   "image/png": "png",
 };
 
+const newName = (file) => {
+  let fileName = file.originalname.split(" ").join("-");
+  fileName = file.originalname.replace(/\.\w+$/gim, "");
+  return fileName;
+};
+
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "../images");
+    cb(null, "images");
   },
   filename: (req, file, cb) => {
-    const name = file.originalname.split(" ").join("-");
     const uniqueSuffix =
-      Date.now() + "-" + file.name + "." + MIME_TYPE[file.mimetype];
+      Date.now() + "-" + newName(file) + "." + MIME_TYPE[file.mimetype];
     cb(null, uniqueSuffix);
   },
 });
 
-module.exports = multer({ storage }).single("image");
+module.exports = multer({ storage }).single("productImage");

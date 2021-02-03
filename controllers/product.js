@@ -2,7 +2,14 @@ const Product = require("../models/product");
 
 exports.createProduct = (req, res, next) => {
   console.log("Create product");
-  const newProduct = new Product({ ...req.body });
+  const productObject = req.body;
+
+  const newProduct = new Product({
+    ...productObject,
+    imageUrl: `${req.protocol}://${req.get("host")}/images/${
+      req.file.filename
+    }`,
+  });
   newProduct
     .save()
     .then((product) => res.status(201).json({ product }))
