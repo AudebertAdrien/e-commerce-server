@@ -6,7 +6,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const productRoute = require("./routes/product");
 const authRoute = require("./routes/auth");
-let mongoDB = process.env.MONGODB_URI;
+const mongoDB = process.env.MONGODB_URI;
+
 mongoose
   .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connexion à MongoDB réussie !"))
