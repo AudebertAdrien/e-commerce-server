@@ -5,10 +5,10 @@ const multer = require("../middlewares/multer");
 
 const productCtrl = require("../controllers/product");
 
-router.get("/", auth, productCtrl.getAllProduct);
-router.get("/:id", auth, productCtrl.getOneProduct);
-router.post("/", auth, multer, productCtrl.createProduct);
-router.put("/:id", auth, multer, productCtrl.updateProduct);
-router.delete("/:id", auth, productCtrl.deleteProduct);
+router.get("/", productCtrl.getAllProduct);
+router.get("/:id", productCtrl.getOneProduct);
+router.post("/", multer, productCtrl.createProduct);
+router.put("/:id", multer, productCtrl.updateProduct);
+router.delete("/:id", productCtrl.deleteProduct);
 
 module.exports = router;
