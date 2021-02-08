@@ -14,7 +14,7 @@ const newName = (file) => {
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "images");
+    cb(null, "public");
   },
   filename: (req, file, cb) => {
     const uniqueSuffix =
