@@ -1,17 +1,21 @@
-require("dotenv").config();
 const path = require("path");
+
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+
 const mongoose = require("mongoose");
+
 const productRoute = require("./routes/product");
 const authRoute = require("./routes/auth");
-const mongoDB = process.env.MONGODB_URI;
 
 mongoose
-  .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Connexion à MongoDB réussie !"))
-  .catch(() => console.log("Connexion à MongoDB échouée !"));
+  .connect(
+    `mongodb+srv://${process.env.DB_USER_PASS}"@cluster0.saoyk.mongodb.net/<dbname>?retryWrites=true&w=majority`,
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((error) => console.log("Failed to connect to MongoDB :", error));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
