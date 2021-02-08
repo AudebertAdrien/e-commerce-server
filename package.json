@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "watch": "nodemon server.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
