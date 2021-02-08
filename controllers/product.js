@@ -5,7 +5,7 @@ exports.createProduct = (req, res, next) => {
   console.log("Create product");
   const newProduct = new Product({
     ...req.body,
-    imageUrl: `https://${S3_BUCKET}.s3.amazonaws.com/${req.file.fileName}`,
+    imageUrl: `https://${S3_BUCKET}.s3.amazonaws.com/public/${req.file.fileName}`,
     /* imageUrl: `${req.protocol}://${req.get("host")}/public/${
       req.file.filename
     }`n */
