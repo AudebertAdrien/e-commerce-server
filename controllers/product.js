@@ -1,18 +1,43 @@
 const Product = require("../models/product");
 const fs = require("fs");
 
+var AWS = require("aws-sdk");
+
 exports.createProduct = (req, res, next) => {
   console.log("Create product");
-  const newProduct = new Product({
-    ...req.body,
-    imageUrl: `${req.protocol}://${req.get("host")}/public/${
-      req.file.filename
-    }`,
+  const file = req.file;
+  console.log(file);
+  const s3FileURL = process.env.AWS_FILE_URL_LINK;
+
+  let s3bucket = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_REGION,
   });
-  newProduct
-    .save()
-    .then((product) => res.status(201).json({ product }))
-    .catch((error) => res.status(400).json({ error }));
+
+  var params = {
+    Bucket: process.env.AWS_BUCKET_NAME,
+    Key: file.originalname,
+    Body: file.buffer,
+    ContentType: file.mimetype,
+    ACL: "public-read",
+  };
+
+  s3bucket.upload(params, function (err, data) {
+    if (err) {
+      res.status(500).json({ error: true, Message: err });
+    } else {
+      const newProduct = new Product({
+        ...req.body,
+        imageUrl: s3FileURL + file.originalname,
+        s3_key: params.Key,
+      });
+      newProduct
+        .save()
+        .then((product) => res.status(201).json({ product }))
+        .catch((error) => res.status(400).json({ error }));
+    }
+  });
 };
 
 exports.updateProduct = (req, res, next) => {

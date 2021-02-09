@@ -7,8 +7,8 @@ const productCtrl = require("../controllers/product");
 
 router.get("/", productCtrl.getAllProduct);
 router.get("/:id", productCtrl.getOneProduct);
-router.post("/", multer, productCtrl.createProduct);
-router.put("/:id", multer, productCtrl.updateProduct);
+router.post("/", multer.single("productImage"), productCtrl.createProduct);
+router.put("/:id", productCtrl.updateProduct);
 router.delete("/:id", productCtrl.deleteProduct);
 
 module.exports = router;
