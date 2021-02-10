@@ -1,5 +1,6 @@
 const Product = require("../models/product");
 const fs = require("fs");
+const s3FileURL = process.env.AWS_Uploaded_File_URL_LINK;
 
 var AWS = require("aws-sdk");
 
@@ -27,7 +28,7 @@ exports.createProduct = (req, res, next) => {
     } else {
       const newProduct = new Product({
         ...req.body,
-        imageUrl: data.Location,
+        imageUrl: s3FileURL + file.originalname,
         s3Key: data.Key,
       });
       newProduct
