@@ -6,8 +6,6 @@ var AWS = require("aws-sdk");
 exports.createProduct = (req, res, next) => {
   console.log("Create product");
   const file = req.file;
-  console.log(file);
-  const s3FileURL = process.env.AWS_FILE_URL_LINK;
 
   let s3bucket = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -29,8 +27,8 @@ exports.createProduct = (req, res, next) => {
     } else {
       const newProduct = new Product({
         ...req.body,
-        imageUrl: s3FileURL + file.originalname,
-        s3_key: params.Key,
+        imageUrl: data.Location,
+        s3Key: data.Key,
       });
       newProduct
         .save()
