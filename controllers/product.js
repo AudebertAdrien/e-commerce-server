@@ -5,8 +5,8 @@ var AWS = require("aws-sdk");
 
 exports.createProduct = (req, res, next) => {
   console.log("Create product");
-  const file = req.file;
 
+  const file = req.file;
   let s3bucket = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -21,7 +21,6 @@ exports.createProduct = (req, res, next) => {
     ACL: "public-read",
   };
 
-  console.log(s3bucket.headBucket());
   s3bucket.upload(params, function (err, data) {
     if (err) {
       res.status(500).json({ error: true, Message: err });
