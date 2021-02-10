@@ -1,6 +1,5 @@
 const Product = require("../models/product");
 const fs = require("fs");
-const s3FileURL = process.env.AWS_Uploaded_File_URL_LINK;
 
 var AWS = require("aws-sdk");
 
@@ -22,13 +21,14 @@ exports.createProduct = (req, res, next) => {
     ACL: "public-read",
   };
 
+  console.log(s3bucket.headBucket());
   s3bucket.upload(params, function (err, data) {
     if (err) {
       res.status(500).json({ error: true, Message: err });
     } else {
       const newProduct = new Product({
         ...req.body,
-        imageUrl: s3FileURL + file.originalname,
+        imageUrl: data.Location,
         s3Key: data.Key,
       });
       newProduct
