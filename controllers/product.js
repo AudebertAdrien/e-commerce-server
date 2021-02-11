@@ -40,6 +40,7 @@ exports.createProduct = (req, res, next) => {
 
 exports.updateProduct = (req, res, next) => {
   console.log("Update product");
+
   const productObject = req.file
     ? {
         ...req.body,
