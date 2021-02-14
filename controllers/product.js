@@ -1,19 +1,19 @@
 const Product = require("../models/product");
-const fs = require("fs");
 
 var AWS = require("aws-sdk");
 
-exports.createProduct = (req, res, next) => {
+exports.createProduct = (req, res) => {
   console.log("Create product");
 
   const file = req.file;
+
   let s3bucket = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     region: process.env.AWS_REGION,
   });
 
-  var params = {
+  let params = {
     Bucket: process.env.AWS_BUCKET_NAME,
     Key: file.originalname,
     Body: file.buffer,
@@ -21,12 +21,14 @@ exports.createProduct = (req, res, next) => {
     ACL: "public-read",
   };
 
-  s3bucket.upload(params, function (err, data) {
-    if (err) {
-      res.status(500).json({ error: true, Message: err });
+  s3bucket.upload(params, function (error, data) {
+    if (error) {
+      res.status(500).json({ error: true, Message: error });
     } else {
       const newProduct = new Product({
         ...req.body,
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: file.originalname,
         imageUrl: data.Location,
         s3Key: data.Key,
       });
@@ -38,17 +40,15 @@ exports.createProduct = (req, res, next) => {
   });
 };
 
-exports.updateProduct = (req, res, next) => {
+exports.updateProduct = (req, res) => {
   console.log("Update product");
 
   const productObject = req.file
     ? {
         ...req.body,
-        imageUrl: `${req.protocol}://${req.get("host")}/images/${
-          req.file.filename
-        }`,
       }
     : { ...req.body };
+
   Product.updateOne(
     { _id: req.params.id },
     { ...productObject, _id: req.params.id }
@@ -57,30 +57,43 @@ exports.updateProduct = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
-exports.getAllProduct = (req, res, next) => {
+exports.deleteProduct = async (req, res, next) => {
+  console.log("Delete product");
+
+  Product.findOneAndDelete({ _id: req.params.id })
+    .then((data) => {
+      let s3bucket = new AWS.S3({
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        region: process.env.AWS_REGION,
+      });
+
+      let params = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: data.s3Key,
+      };
+
+      s3bucket.deleteObject(params, (error, file) => {
+        if (error) {
+          res.status(500).json({ error: true, Message: error });
+        } else {
+          res.status(200).json({ message: "Product delete!" });
+        }
+      });
+    })
+    .catch((error) => res.status(400).json({ error }));
+};
+
+exports.getAllProduct = (req, res) => {
   console.log("All products");
   Product.find()
     .then((products) => res.status(200).json({ products }))
     .catch((error) => res.status(400).json({ error }));
 };
 
-exports.getOneProduct = (req, res, next) => {
+exports.getOneProduct = (req, res) => {
   console.log("Get one product");
   Product.findOne({ _id: req.params.id })
     .then((product) => res.status(200).json({ product }))
     .catch((error) => res.status(400).json({ error }));
-};
-
-exports.deleteProduct = (req, res, next) => {
-  console.log("Delete product");
-  Product.findOne({ _id: req.params.id })
-    .then((product) => {
-      const filename = product.imageUrl.split("/images")[1];
-      fs.unlink(`images/${filename}`, () => {
-        Product.deleteOne({ _id: req.params.id })
-          .then(() => res.status(204).json({ message: "Deleted!" }))
-          .catch((error) => res.status(400).json({ error }));
-      });
-    })
-    .catch((error) => res.status(500).json({ error }));
 };
