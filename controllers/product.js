@@ -3,8 +3,6 @@ const Product = require("../models/product");
 var AWS = require("aws-sdk");
 
 exports.createProduct = (req, res) => {
-  console.log("Create product");
-
   const file = req.file;
 
   let s3bucket = new AWS.S3({
@@ -41,8 +39,6 @@ exports.createProduct = (req, res) => {
 };
 
 exports.updateProduct = (req, res) => {
-  console.log("Update product");
-
   const productObject = req.file
     ? {
         ...req.body,
@@ -58,8 +54,6 @@ exports.updateProduct = (req, res) => {
 };
 
 exports.deleteProduct = async (req, res, next) => {
-  console.log("Delete product");
-
   Product.findOneAndDelete({ _id: req.params.id })
     .then((data) => {
       let s3bucket = new AWS.S3({
@@ -85,14 +79,12 @@ exports.deleteProduct = async (req, res, next) => {
 };
 
 exports.getAllProduct = (req, res) => {
-  console.log("All products");
   Product.find()
     .then((products) => res.status(200).json({ products }))
     .catch((error) => res.status(400).json({ error }));
 };
 
 exports.getOneProduct = (req, res) => {
-  console.log("Get one product");
   Product.findOne({ _id: req.params.id })
     .then((product) => res.status(200).json({ product }))
     .catch((error) => res.status(400).json({ error }));

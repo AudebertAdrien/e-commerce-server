@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const { checkUser, requireAuth } = require("./middlewares/auth");
 
 const mongoose = require("mongoose");
 
@@ -30,7 +32,11 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
-
+app.use(cookieParser());
+app.use("*", checkUser);
+app.get("/jwtid", requireAuth, (req, res) => {
+  res.status(200).send(res.locals.user.id);
+});
 // app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/products", productRoute);

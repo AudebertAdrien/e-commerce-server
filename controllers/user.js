@@ -56,7 +56,6 @@ module.exports.follow = async (req, res) => {
   )
     return res.status(400).send("ID unknown follow");
   try {
-    console.log("test");
     await UserModel.updateOne(
       { _id: req.params.id },
       {
@@ -85,7 +84,6 @@ module.exports.unFollow = async (req, res) => {
   )
     return res.status(400).send("ID unknown");
   try {
-    console.log("test2");
     await UserModel.updateOne(
       { _id: req.params.id },
       {
