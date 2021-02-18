@@ -19,8 +19,9 @@ exports.signUp = async (req, res) => {
 };
 
 exports.signIn = async (req, res) => {
+  const { email, password } = req.body;
   try {
-    const user = await UserModel.login({ ...req.body });
+    const user = await UserModel.login(email, password);
     const token = createToken(user._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: 60 * 60 * 24 * 7 });
     res.status(200).json({ user: user.id });

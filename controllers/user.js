@@ -29,11 +29,11 @@ module.exports.updateUser = async (req, res) => {
       },
       (err, docs) => {
         if (!err) return res.send(docs);
-        if (err) return res.status(500).send({ message1: err });
+        if (err) return res.status(500).send({ message: err });
       }
     );
   } catch (err) {
-    return res.status(500).send({ message2: err });
+    return res.status(500).send({ message: err });
   }
 };
 
@@ -45,7 +45,7 @@ module.exports.deleteUser = async (req, res) => {
     await UserModel.remove({ _id: req.params.id }).exec();
     res.status(200).json({ message: "Delete user!" });
   } catch (err) {
-    return res.status(500).send({ message2: err });
+    return res.status(500).send({ message: err });
   }
 };
 
@@ -73,7 +73,7 @@ module.exports.follow = async (req, res) => {
     );
     res.status(200).json({ message: "Following and followers" });
   } catch (err) {
-    return res.status(500).send({ message2: err });
+    return res.status(500).send({ message: err });
   }
 };
 
@@ -99,6 +99,6 @@ module.exports.unFollow = async (req, res) => {
     );
     res.status(200).json({ message: "UnFollowing and UnFollowers" });
   } catch (err) {
-    return res.status(500).send({ message2: err });
+    return res.status(500).send({ message: err });
   }
 };
