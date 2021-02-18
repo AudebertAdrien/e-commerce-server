@@ -19,9 +19,8 @@ exports.signUp = async (req, res) => {
 };
 
 exports.signIn = async (req, res) => {
-  const { email, password } = req.body;
   try {
-    const user = await UserModel.login(email, password);
+    const user = await UserModel.login({ ...req.body });
     const token = createToken(user._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: 60 * 60 * 24 * 7 });
     res.status(200).json({ user: user.id });
@@ -33,5 +32,5 @@ exports.signIn = async (req, res) => {
 
 exports.logout = async (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
-  res.status(200).json({ message: "no more cookie" });
+  res.status(200).json({ message: "Cookie was remove" });
 };
