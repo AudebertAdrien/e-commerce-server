@@ -59,16 +59,14 @@ module.exports.follow = async (req, res) => {
     await UserModel.updateOne(
       { _id: req.params.id },
       {
-        ...req.body,
-        following: req.body.idToFollow,
+        $addToSet: { following: req.body.idToFollow },
       }
     );
 
     await UserModel.updateOne(
       { _id: req.body.idToFollow },
       {
-        ...req.body,
-        followers: req.params.id,
+        $addToSet: { followers: req.params.id },
       }
     );
     res.status(200).json({ message: "Following and followers" });
