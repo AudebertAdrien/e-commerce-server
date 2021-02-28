@@ -12,7 +12,7 @@ const userRoute = require("./routes/user");
 mongoose
   .connect(
     `mongodb+srv://${process.env.DB_USER_PASS}"@cluster0.saoyk.mongodb.net/<dbname>?retryWrites=true&w=majority`,
-    { useNewUrlParser: true, useUnifiedTopology: true }
+    { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
   )
   .then(() => console.log("Connected to MongoDB"))
   .catch((error) => console.log("Failed to connect to MongoDB :", error));

@@ -9,6 +9,7 @@ const s3bucket = new AWS.S3({
 });
 
 exports.createProduct = (req, res) => {
+  console.log("CreateProduct");
   const file = req.file;
 
   let params = {
@@ -37,21 +38,36 @@ exports.createProduct = (req, res) => {
 };
 
 exports.updateProduct = (req, res) => {
-  const productObject = req.file
-    ? {
-        ...req.body,
-      }
-    : { ...req.body };
+  /*   console.log("UpdateProduct");
+  const file = req.file;
 
-  Product.updateOne(
+  let params = {
+    Bucket: process.env.AWS_BUCKET_NAME,
+    Key: file.originalname,
+    Body: file.buffer,
+    ContentType: file.mimetype,
+    ACL: "public-read",
+  };
+
+
+
+  Product.findOneAndUpdate(
     { _id: req.params.id },
-    { ...productObject, _id: req.params.id }
-  )
-    .then(() => res.status(200).json({ message: "Modified!" }))
-    .catch((error) => res.status(400).json({ error }));
+    { ...req.body, imageUrl: data.Location, s3Key: data.Key },
+    (error, data) => {
+      s3bucket.putObject(params, (error, data) => {
+        if (error) {
+          res.status(500).json({ error: true, Message: error });
+        } else {
+          res.status(200).json(data);
+        }
+      });
+    }
+  ); */
 };
 
 exports.deleteProduct = async (req, res, next) => {
+  console.log("DeleteProduct");
   Product.findOneAndDelete({ _id: req.params.id })
     .then((data) => {
       let params = {
@@ -59,11 +75,11 @@ exports.deleteProduct = async (req, res, next) => {
         Key: data.s3Key,
       };
 
-      s3bucket.deleteObject(params, (error, file) => {
+      s3bucket.deleteObject(params, (error, data) => {
         if (error) {
           res.status(500).json({ error: true, Message: error });
         } else {
-          res.status(200).json({ message: "Deleted!" });
+          res.status(200).json({ message: "Product Deleted!" });
         }
       });
     })
@@ -71,12 +87,14 @@ exports.deleteProduct = async (req, res, next) => {
 };
 
 exports.getAllProduct = (req, res) => {
+  console.log("AllProduct");
   Product.find()
     .then((products) => res.status(200).json({ products }))
     .catch((error) => res.status(400).json({ error }));
 };
 
 exports.getOneProduct = (req, res) => {
+  console.log("GetOneProduct");
   Product.findOne({ _id: req.params.id })
     .then((product) => res.status(200).json({ product }))
     .catch((error) => res.status(400).json({ error }));
