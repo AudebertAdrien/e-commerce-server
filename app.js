@@ -18,7 +18,7 @@ mongoose
   .catch((error) => console.log("Failed to connect to MongoDB :", error));
 
 const corsOptions = {
-  origin: "https://my-e-commerce-client.herokuapp.com/",
+  origin: "https://my-e-commerce-client.herokuapp.com",
   optionsSuccessStatus: 200,
 };
 
