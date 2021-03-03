@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-
+const cors = require("cors");
 const { checkUser, requireAuth } = require("./middlewares/auth");
 
 const productRoute = require("./routes/product");
@@ -17,18 +17,12 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((error) => console.log("Failed to connect to MongoDB :", error));
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-  );
-  next();
-});
+const corsOptions = {
+  origin: "https://my-e-commerce-client.herokuapp.com/",
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
