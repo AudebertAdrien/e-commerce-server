@@ -6,7 +6,7 @@ module.exports.signUpErrors = (err) => {
   if (err.code === 11000 && Object.keys(err.keyValue)[0].includes("speudo"))
     errors.speudo = "Speudo taken!";
   if (err.code === 11000 && Object.keys(err.keyValue)[0].includes("email"))
-    errors.email = "email taken!";
+    errors.email = "Email taken!";
   return errors;
 };
 

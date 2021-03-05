@@ -6,28 +6,7 @@ const s3 = new AWS.S3({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: process.env.AWS_REGION,
 });
-/*
-[
-  {
-    fieldname: 'file',
-    originalname: 'c-d-x-5qT09yIbROk-unsplash.jpg',
-    encoding: '7bit',
-    mimetype: 'image/jpeg',
-    size: 879172,
-    bucket: 'my-e-commerce-bucket',
-    key: '1614782391183',
-    acl: 'public-read',
-    contentType: 'application/octet-stream',
-    contentDisposition: null,
-    storageClass: 'STANDARD',
-    serverSideEncryption: null,
-    metadata: null,
-    location: 'https://my-e-commerce-bucket.s3.eu-west-1.amazonaws.com/1614782391183',
-    etag: '"5a1f394333fff4ba1cd1093556cd8d32"',
-    versionId: undefined
-  }
-]
-*/
+
 exports.createProduct = (req, res) => {
   console.log("CreateProduct");
   const file = req.files[0];
