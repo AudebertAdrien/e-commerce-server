@@ -30,10 +30,12 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+/*
 app.use("*", checkUser);
 app.get("/jwtid", requireAuth, (req, res) => {
   res.status(200).send(res.locals.user.id);
 });
+*/
 
 app.use("/api/user", userRoute);
 app.use("/api/products", productRoute);

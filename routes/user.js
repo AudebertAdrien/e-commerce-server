@@ -8,6 +8,7 @@ router.post("/register", authController.signUp);
 router.post("/login", authController.signIn);
 router.get("/logout", authController.logout);
 
+//Admin get all users
 router.get("/", userController.getAllUsers);
 
 router.get("/:id", userController.findOneUser);
