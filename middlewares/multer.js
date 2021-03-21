@@ -32,26 +32,3 @@ const upload = multer({
 });
 
 module.exports = upload;
-
-/*
-[
-  {
-    fieldname: 'file',
-    originalname: 'exemple.jpg',
-    encoding: '7bit',
-    mimetype: 'image/jpeg',
-    size: 879172,
-    bucket: 'my-e-commerce-bucket',
-    key: '1614782391183',
-    acl: 'public-read',
-    contentType: 'application/octet-stream',
-    contentDisposition: null,
-    storageClass: 'STANDARD',
-    serverSideEncryption: null,
-    metadata: null,
-    location: 'https://my-e-commerce-bucket.s3.eu-west-1.amazonaws.com/1614782391183',
-    etag: '"5a1f394333fff4ba1cd1093556cd8d32"',
-    versionId: undefined
-  }
-]
-*/

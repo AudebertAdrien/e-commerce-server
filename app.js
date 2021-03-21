@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const { checkUser, requireAuth } = require("./middlewares/auth");
+// const { checkUser, requireAuth } = require("./middlewares/auth");
 
 const productRoute = require("./routes/product");
 const userRoute = require("./routes/user");

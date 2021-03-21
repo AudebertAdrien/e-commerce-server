@@ -24,26 +24,35 @@ exports.createProduct = (req, res) => {
 exports.updateProduct = (req, res) => {
   console.log("UpdateProduct");
   const file = req.files[0];
-  const update = {
-    ...req.body,
-    imageUrl: file.location,
-    s3Key: file.key,
-  };
 
-  Product.findOneAndUpdate(req.params.id, update)
-    .then((data) => {
-      let params = {
-        Bucket: process.env.AWS_BUCKET_NAME,
-        Key: data.s3Key,
+  const update = file
+    ? {
+        ...req.body,
+        imageUrl: file.location,
+        s3Key: file.key,
+      }
+    : {
+        ...req.body,
       };
 
-      s3.deleteObject(params, (error, data) => {
-        if (error) {
-          res.status(500).json({ error: true, Message: error });
-        } else {
-          res.status(200).json({ message: "Product Updated!" });
-        }
-      });
+  Product.findOneAndUpdate({ _id: req.params.id }, update)
+    .then((data) => {
+      if (file) {
+        let params = {
+          Bucket: process.env.AWS_BUCKET_NAME,
+          Key: data.s3Key,
+        };
+
+        s3.deleteObject(params, (error, data) => {
+          if (error) {
+            res.status(500).json({ error: true, Message: error });
+          } else {
+            res.status(200).json({ message: "Product Updated!" });
+          }
+        });
+      } else {
+        res.status(200).json({ message: "Product Updated!" });
+      }
     })
     .catch((error) => res.status(400).json({ error }));
 };
