@@ -19,4 +19,8 @@ const corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 
+app.get("/", function (req, res) {
+  res.send("hello world");
+});
+
 module.exports = app;
