@@ -24,14 +24,13 @@ MongoClient.connect(
     const db = client.db(DATABASE);
 
     app.get("/", function (req, res) {
-      console.log("getIncidence");
       try {
         db.collection("incidence")
           .find()
           .limit(5)
           .toArray()
-          .then((result) => {
-            console.log(result);
+          .then((data) => {
+            res.status(200).json(data);
           });
       } catch (error) {
         console.error(error);
