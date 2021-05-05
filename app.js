@@ -5,7 +5,7 @@ const cors = require("cors");
 
 mongoose
   .connect(
-    `mongodb+srv://adrien:${process.env.DB_USER_PASS}@cluster0.9sobl.mongodb.net/data-gouv?retryWrites=true&w=majority`,
+    `mongodb+srv://adrien:${process.env.DB_USER_PASS}@cluster0.cxrmv.mongodb.net/data-gouv?retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
   )
   .then(() => console.log("Connected to MongoDB"))
