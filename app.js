@@ -1,34 +1,8 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+
 const { MongoClient } = require("mongodb");
-
-async function main() {
-  const uri = `mongodb+srv://adrien:${process.env.DB_USER_PASS}@cluster0.cxrmv.mongodb.net/data-gouv?retryWrites=true&w=majority`;
-
-  const client = new MongoClient(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-
-  async function listDatabases(client) {
-    databasesList = await client.db().admin().listDatabases();
-
-    console.log("Databases:");
-    databasesList.databases.forEach((db) => console.log(` - ${db.name}`));
-  }
-
-  try {
-    await client.connect();
-    await listDatabases(client);
-  } catch (e) {
-    console.error(e);
-  } finally {
-    await client.close();
-  }
-}
-
-main().catch(console.error);
 
 const corsOptions = {
   origin: "*",
@@ -38,8 +12,32 @@ const corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 
-app.get("/", function (req, res) {
-  res.send("hello world");
-});
+const uri = `mongodb+srv://adrien:${process.env.DB_USER_PASS}@cluster0.cxrmv.mongodb.net/data-gouv?retryWrites=true&w=majority`;
+const DATABASE = "data-gouv";
+
+MongoClient.connect(
+  uri,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  (err, client) => {
+    if (err) return console.error(err);
+    console.log("Connected successfully to server");
+    const db = client.db(DATABASE);
+
+    app.get("/", function (req, res) {
+      console.log("getIncidence");
+      try {
+        db.collection("incidence")
+          .find()
+          .limit(5)
+          .toArray()
+          .then((result) => {
+            console.log(result);
+          });
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  }
+);
 
 module.exports = app;
