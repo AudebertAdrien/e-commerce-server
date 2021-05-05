@@ -1,15 +1,34 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
 const cors = require("cors");
+const { MongoClient } = require("mongodb");
 
-mongoose
-  .connect(
-    `mongodb+srv://adrien:${process.env.DB_USER_PASS}@cluster0.cxrmv.mongodb.net/data-gouv?retryWrites=true&w=majority`,
-    { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
-  )
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((error) => console.log("Failed to connect to MongoDB :", error));
+async function main() {
+  const uri = `mongodb+srv://adrien:${process.env.DB_USER_PASS}@cluster0.cxrmv.mongodb.net/data-gouv?retryWrites=true&w=majority`;
+
+  const client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
+  async function listDatabases(client) {
+    databasesList = await client.db().admin().listDatabases();
+
+    console.log("Databases:");
+    databasesList.databases.forEach((db) => console.log(` - ${db.name}`));
+  }
+
+  try {
+    await client.connect();
+    await listDatabases(client);
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await client.close();
+  }
+}
+
+main().catch(console.error);
 
 const corsOptions = {
   origin: "*",
