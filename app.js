@@ -33,21 +33,34 @@ MongoClient.connect(
       return ((100000 * sumOfPositiveCase) / sumOfPopulation).toFixed(2);
     }
 
-    function newArrayOfRegions(dataCovid19) {
-      let findUniqueRegion = [...new Set(dataCovid19.map((doc) => doc.dep))];
-      console.log(findUniqueRegion);
+    // ex: [ { '1': '1.37' }, { '2': '2.76' }, { '3': '0.60' } ]
+    function newArrayOfRegionsAndIncidences(dataCovid19) {
+      // get all the regions number
+      let findRegionalNumbers = [...new Set(dataCovid19.map((doc) => doc.dep))];
+
+      let result = findRegionalNumbers.map((num) => {
+        // get all regions data by number
+        let sortedRegions = dataCovid19.filter((doc) => doc.dep === num);
+        let obj = {
+          [`${num}`]: calculateIncidenceRate(sortedRegions),
+        };
+        return obj;
+      });
+      return result;
     }
 
     app.get("/", function (req, res) {
       try {
         db.collection("incidence")
           .find({ jour: { $eq: "2020-05-14" } })
-          .limit(22)
+          .limit(33)
           .sort({ dep: 1, _id: 1 })
           .toArray()
           .then((dataCovid19) => {
-            newArrayOfRegions(dataCovid19);
-            res.status(200).json(dataCovid19);
+            let regionAndIncidence = newArrayOfRegionsAndIncidences(
+              dataCovid19
+            );
+            res.status(200).json(regionAndIncidence);
           });
       } catch (error) {
         console.error(error);
