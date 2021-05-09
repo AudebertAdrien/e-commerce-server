@@ -30,16 +30,19 @@ MongoClient.connect(
         sumOfPositiveCase += depData[i].P;
         sumOfPopulation += depData[i].pop;
       }
-      return ((100000 * sumOfPositiveCase) / sumOfPopulation).toFixed(2);
+      function roundToTwo(num) {
+        return Math.round((num + Number.EPSILON) * 100) / 100;
+      }
+      return roundToTwo((100000 * sumOfPositiveCase) / sumOfPopulation);
     }
 
-    // ex: [ { '1': '1.37' }, { '2': '2.76' }, { '3': '0.60' } ]
-    function newArrayOfRegionsAndIncidences(dataCovid19) {
-      // get all the regions number
+    // ex of result : [ { '1': '1.37' }, { '2': '2.76' }, { '3': '0.60' } ]
+    function newArrayOfDepartmentAndIncidences(dataCovid19) {
+      // get all the departments number
       let findRegionalNumbers = [...new Set(dataCovid19.map((doc) => doc.dep))];
 
       let result = findRegionalNumbers.map((num) => {
-        // get all regions data by number
+        // get a new array (number of dep : incidence))
         let sortedRegions = dataCovid19.filter((doc) => doc.dep === num);
         let obj = {
           [`${num}`]: calculateIncidenceRate(sortedRegions),
@@ -52,15 +55,14 @@ MongoClient.connect(
     app.get("/", function (req, res) {
       try {
         db.collection("incidence")
-          .find({ jour: { $eq: "2020-05-14" } })
-          .limit(33)
+          .find({ jour: { $eq: "2020-05-20" } })
           .sort({ dep: 1, _id: 1 })
           .toArray()
           .then((dataCovid19) => {
-            let regionAndIncidence = newArrayOfRegionsAndIncidences(
+            let departmentsAndIncidence = newArrayOfDepartmentAndIncidences(
               dataCovid19
             );
-            res.status(200).json(regionAndIncidence);
+            res.status(200).json(departmentsAndIncidence);
           });
       } catch (error) {
         console.error(error);
