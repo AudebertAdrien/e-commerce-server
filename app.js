@@ -5,7 +5,7 @@ const cors = require("cors");
 const { MongoClient } = require("mongodb");
 
 const corsOptions = {
-  origin: "*",
+  origin: ["https://data-gouv-client.herokuapp.com/", "http://localhost:8080/"],
   optionsSuccessStatus: 200,
 };
 
