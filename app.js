@@ -37,15 +37,17 @@ MongoClient.connect(
     }
 
     // ex of result : [ { '1': '1.37' }, { '2': '2.76' }, { '3': '0.60' } ]
-    function newArrayOfDepartmentAndIncidences(dataCovid19) {
+    function newArrayOfDepartmentsAndIncidences(dataCovid19) {
       // get all the departments number
-      let findRegionalNumbers = [...new Set(dataCovid19.map((doc) => doc.dep))];
+      let findDepartmentsNumbers = [
+        ...new Set(dataCovid19.map((doc) => doc.dep)),
+      ];
 
-      let result = findRegionalNumbers.map((num) => {
+      let result = findDepartmentsNumbers.map((num) => {
         // get a new array (number of dep : incidence))
-        let sortedRegions = dataCovid19.filter((doc) => doc.dep === num);
+        let sortedDep = dataCovid19.filter((doc) => doc.dep === num);
         let obj = {
-          [`${num}`]: calculateIncidenceRate(sortedRegions),
+          [`${num}`]: calculateIncidenceRate(sortedDep),
         };
         return obj;
       });
@@ -59,9 +61,8 @@ MongoClient.connect(
           .sort({ dep: 1, _id: 1 })
           .toArray()
           .then((dataCovid19) => {
-            let departmentsAndIncidence = newArrayOfDepartmentAndIncidences(
-              dataCovid19
-            );
+            let departmentsAndIncidence =
+              newArrayOfDepartmentsAndIncidences(dataCovid19);
             res.status(200).json(departmentsAndIncidence);
           });
       } catch (error) {
