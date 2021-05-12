@@ -33,7 +33,7 @@ MongoClient.connect(
       function roundToTwo(num) {
         return Math.round((num + Number.EPSILON) * 100) / 100;
       }
-      return roundToTwo((100000 * sumOfPositiveCase) / sumOfPopulation);
+      return roundToTwo((sumOfPositiveCase * 100000) / sumOfPopulation);
     }
 
     // ex of result : [ { '1': '1.37' }, { '2': '2.76' }, { '3': '0.60' } ]
@@ -57,12 +57,13 @@ MongoClient.connect(
     app.get("/", function (req, res) {
       try {
         db.collection("incidence")
-          .find({ jour: { $eq: "2020-05-20" } })
+          .find({ jour: { $eq: "2021-04-30" } })
           .sort({ dep: 1, _id: 1 })
           .toArray()
           .then((dataCovid19) => {
             let departmentsAndIncidence =
               newArrayOfDepartmentsAndIncidences(dataCovid19);
+            console.log(departmentsAndIncidence);
             res.status(200).json(departmentsAndIncidence);
           });
       } catch (error) {
