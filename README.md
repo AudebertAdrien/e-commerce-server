@@ -2,9 +2,10 @@
 
 ---
 
-Table of Contents
+## Description
 
-1. [Package](###package)
+- Github link
+  https://github.com/AudebertAdrien/data-gouv-server
 
 ### Packages
 
@@ -17,7 +18,3 @@ Table of Contents
 ### Database
 
 - MongoDB
-
-### .env
-
-DB_USER_PASS = `Connection MongoDB method`
