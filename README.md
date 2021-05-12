@@ -1,7 +1,23 @@
-# Data-Gouv-server
+# Departments and Incidence Back end
 
-https://github.com/AudebertAdrien/data-gouv-server
+---
 
-# .env
+Table of Contents
 
-DB_USER_PASS = Connection MongoDB method
+1. [Package](###package)
+
+### Packages
+
+- Cors
+- Dotenv
+- Express
+- Jsonwebtoken
+- MongoDB
+
+### Database
+
+- MongoDB
+
+### .env
+
+DB_USER_PASS = `Connection MongoDB method`
