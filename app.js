@@ -9,7 +9,8 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
-app.use(express.json());
+// app.use(express.json()); //Extract incoming data of a POST json request.
+app.use(express.text());
 app.use(cors(corsOptions));
 
 const uri = `mongodb+srv://adrien:${process.env.DB_USER_PASS}@cluster0.cxrmv.mongodb.net/data-gouv?retryWrites=true&w=majority`;
@@ -54,10 +55,10 @@ MongoClient.connect(
       return result;
     }
 
-    app.get("/", function (req, res) {
+    app.post("/", function (req, res) {
       try {
         db.collection("incidence")
-          .find({ jour: { $eq: "2021-04-30" } })
+          .find({ jour: { $eq: req.body } })
           .sort({ dep: 1, _id: 1 })
           .toArray()
           .then((dataCovid19) => {
@@ -74,3 +75,4 @@ MongoClient.connect(
 );
 
 module.exports = app;
+console.log("undefined");
