@@ -31,10 +31,10 @@ MongoClient.connect(
         sumOfPositiveCase += depData[i].P;
         sumOfPopulation += depData[i].pop;
       }
-      function roundToTwo(num) {
+      function roundedToTwo(num) {
         return Math.round((num + Number.EPSILON) * 100) / 100;
       }
-      return roundToTwo((sumOfPositiveCase * 100000) / sumOfPopulation);
+      return roundedToTwo((sumOfPositiveCase * 100000) / sumOfPopulation);
     }
 
     // ex of result : [ { '1': '1.37' }, { '2': '2.76' }, { '3': '0.60' } ]
