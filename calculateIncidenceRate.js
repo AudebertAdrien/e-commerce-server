@@ -1,5 +1,4 @@
 module.exports = function (depData) {
-  console.log("calculateIncidenceRate");
   let sumOfPopulation = 0;
   let sumOfPositiveCase = 0;
   for (let i = 0; i < depData.length; i++) {

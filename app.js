@@ -4,6 +4,7 @@ const cors = require("cors");
 const { MongoClient } = require("mongodb");
 
 const newArrayOfDepartmentsAndIncidences = require("./newArrayOfDepartmentsAndIncidences");
+const scheduleDataCovidCSV = require("./scheduleDataCovidCSV");
 
 const corsOptions = {
   origin: ["https://data-gouv-client.herokuapp.com", "http://localhost:8080"],
@@ -14,10 +15,7 @@ app.use(express.text());
 app.use(cors(corsOptions));
 
 // get every 24 hours an updated csv file of covid data 19 from data.gouv.fr
-const scheduleDataCovidCSV = require("./scheduleDataCovidCSV");
 scheduleDataCovidCSV();
-
-// process a data
 
 const uri = `mongodb+srv://adrien:${process.env.DB_USER_PASS}@cluster0.cxrmv.mongodb.net/data-gouv?retryWrites=true&w=majority`;
 const DATABASE = "data-gouv";
