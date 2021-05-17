@@ -1,9 +1,9 @@
 const fs = require("fs");
 const path = require("path");
 
-module.exports = function (i) {
+module.exports = function () {
   console.log("formatTheNewCSVFile");
-  const textPath = path.resolve(__dirname, "docs", `output${i}.csv`);
+  const textPath = path.resolve(__dirname, "docs", "output.csv");
 
   fs.readFile(textPath, "utf-8", (err, data) => {
     if (err) throw err;
