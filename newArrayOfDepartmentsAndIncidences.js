@@ -7,7 +7,12 @@ module.exports = function (dataCovid19) {
   let findDepartmentsNumbers = [...new Set(dataCovid19.map((doc) => doc.dep))];
 
   let result = findDepartmentsNumbers.map((num) => {
-    let sortedDep = dataCovid19.filter((doc) => doc.dep === num);
+    let i = 0;
+    let sortedDep = dataCovid19.filter((doc) => {
+      if (doc.dep === num) {
+        return doc;
+      }
+    });
     let obj = {
       [`${num}`]: calculateIncidenceRate(sortedDep),
     };

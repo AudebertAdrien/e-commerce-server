@@ -37,7 +37,6 @@ MongoClient.connect(
           .then((dataCovid19) => {
             let departmentsAndIncidence =
               newArrayOfDepartmentsAndIncidences(dataCovid19);
-            // console.log(departmentsAndIncidence);
             res.status(200).json(departmentsAndIncidence);
           });
       } catch (error) {
