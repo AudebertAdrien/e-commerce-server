@@ -1,5 +1,5 @@
 const { exec } = require("child_process");
-console.log("aaaaaaa!!!");
+console.log("ttttttttttttt!!!");
 
 exec(process.env.MONGODB_URI, (error, stdout, stderr) => {
   if (error) {
