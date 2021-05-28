@@ -1,2 +1,2 @@
 web: npm start
-worker: node test.js
+worker: node scheduleDataCovidCSV.js
