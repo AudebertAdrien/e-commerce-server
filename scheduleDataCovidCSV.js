@@ -8,7 +8,7 @@ const formatTheNewCSVFile = require("./formatTheNewCSVFile");
 
 console.log("scheduleDataCovidCSV");
 cron.schedule(
-  "*/3 * * * *",
+  "* * * * *",
   () => {
     console.log("inside");
     async function downloadCsv() {
