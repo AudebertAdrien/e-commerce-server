@@ -23,4 +23,6 @@
 - [Node-cron](https://www.npmjs.com/package/node-cron)  
    This module allows you to schedule task in node.js.
 
-test
+### Heroku configuration
+
+Buildpack : [MongoDb](https://github.com/o5r/heroku-buildpack-mongo)

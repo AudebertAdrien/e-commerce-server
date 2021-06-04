@@ -5,7 +5,6 @@ const { MongoClient } = require("mongodb");
 
 const newArrayOfDepartmentsAndIncidences = require("./newArrayOfDepartmentsAndIncidences");
 const scheduleDataCovidCSV = require("./scheduleDataCovidCSV");
-// const test = require("./test");
 
 const corsOptions = {
   origin: [
@@ -29,7 +28,6 @@ MongoClient.connect(
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err, client) => {
     scheduleDataCovidCSV();
-    // test();
     if (err) return console.error(err);
     console.log("Connected successfully to server");
     const db = client.db(DATABASE);
