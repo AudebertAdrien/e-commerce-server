@@ -9,7 +9,7 @@ const formatTheNewCSVFile = require("./formatTheNewCSVFile");
 module.exports = function () {
   console.log("scheduleDataCovidCSV");
   cron.schedule(
-    "18 15 * * *",
+    "59 23 * * *",
     () => {
       async function downloadCsv() {
         console.log("downloadCsv");
