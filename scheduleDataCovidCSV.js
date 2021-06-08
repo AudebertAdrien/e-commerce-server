@@ -9,9 +9,10 @@ const formatTheNewCSVFile = require("./formatTheNewCSVFile");
 module.exports = function () {
   console.log("scheduleDataCovidCSV");
   cron.schedule(
-    "04 14 * * *",
+    "4 * * * *",
     () => {
       async function downloadCsv() {
+        console.log("downloadCsv");
         const url =
           "https://www.data.gouv.fr/fr/datasets/r/19a91d64-3cd3-42fc-9943-d635491a4d76";
 
