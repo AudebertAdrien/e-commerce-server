@@ -26,13 +26,12 @@ const client = new MongoClient(uri, {
 client.connect((err) => {
   if (err) return console.error(err);
   console.log("Connected successfully to server");
-  // const db = client.db("items");
+  const db = client.db("items");
   // perform actions on the collection object
   client.close();
 });
 
 app.get("/", (req, res) => {
-  console.log("test!!!!!!!!!!!!!!!!");
   res.status(200);
 });
 
