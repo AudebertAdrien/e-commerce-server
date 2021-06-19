@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const MongoClient = require("mongodb").MongoClient;
+const datas = require("./fruitAndVegetable.json");
 
 const corsOptions = {
   origin: [
@@ -32,7 +33,7 @@ client.connect((err) => {
 });
 
 app.get("/", (req, res) => {
-  res.status(200);
+  res.status(200).json(datas);
 });
 
 module.exports = app;
