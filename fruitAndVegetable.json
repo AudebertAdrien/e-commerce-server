@@ -44,13 +44,20 @@
         },
         {
             "id": 7,
+            "name": "wood",
+            "type": "grocery",
+            "image": "https://via.placeholder.com/150/573796",
+            "pice": 15
+        },
+        {
+            "id": 8,
             "name": "coca",
             "type": "drink",
             "image": "https://via.placeholder.com/150/24f355",
             "pice": 50
         },
         {
-            "id": 8,
+            "id": 9,
             "name": "wine",
             "type": "drink",
             "image": "https://via.placeholder.com/150/d32776",
