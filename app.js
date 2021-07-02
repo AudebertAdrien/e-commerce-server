@@ -6,7 +6,7 @@ const datas = require("./fruitAndVegetable.json");
 
 const corsOptions = {
   origin: [
-    "https://my-e-commerce-client.herokuapp.com/",
+    "https://my-e-commerce-client.herokuapp.com",
     "http://localhost:8080",
     "http://localhost:5000",
   ],
