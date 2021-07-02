@@ -1,14 +1,14 @@
-# Departments and Incidence Back end
+# e-commerce Back end
 
 ---
 
 ## Description
 
 - See front end for more information  
-  https://github.com/AudebertAdrien/data-gouv-client
+  https://github.com/AudebertAdrien/e-commerce-client
 
 - Github link
-  https://github.com/AudebertAdrien/data-gouv-server
+  https://github.com/AudebertAdrien/e-commerce-server
 
 ### Packages
 
@@ -20,8 +20,6 @@
   Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
 - [MongoDB](https://www.mongodb.com/)  
   MongoDB is a document-oriented NoSQL database used for high volume data storage. Instead of using tables and rows as in the traditional relational databases, MongoDB makes use of collections and documents. Documents consist of key-value pairs which are the basic unit of data in MongoDB. Collections contain sets of documents and function which is the equivalent of relational database tables.
-- [Node-cron](https://www.npmjs.com/package/node-cron)  
-   This module allows you to schedule task in node.js.
 
 ### Heroku configuration
 

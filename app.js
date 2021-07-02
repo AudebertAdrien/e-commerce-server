@@ -6,14 +6,14 @@ const datas = require("./fruitAndVegetable.json");
 
 const corsOptions = {
   origin: [
-    "https://data-gouv-client.herokuapp.com",
+    "https://my-e-commerce-client.herokuapp.com/",
     "http://localhost:8080",
     "http://localhost:5000",
   ],
   optionsSuccessStatus: 200,
 };
 
-app.use(express.text());
+app.use(express.json());
 app.use(cors(corsOptions));
 
 const DATABASE = "items";
