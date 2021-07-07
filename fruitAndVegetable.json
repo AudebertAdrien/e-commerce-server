@@ -5,7 +5,7 @@
             "name": "Apple",
             "type": "fruit",
             "image": "https://via.placeholder.com/150/92c952",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
             "price": 35
         },
         {
@@ -13,7 +13,7 @@
             "name": "Banana",
             "type": "fruit",
             "image": "https://via.placeholder.com/150/f66b97",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
             "price": 12
         },
         {
@@ -21,7 +21,7 @@
             "name": "oinion",
             "type": "vegetable",
             "image": "https://via.placeholder.com/150/56a8c2",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
             "price": 45
         },
         {
@@ -29,7 +29,7 @@
             "type": "vegetable",
             "name": "carrot",
             "image": "https://via.placeholder.com/150/b0f7cc",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
             "price": 200
         },
         {
@@ -37,40 +37,40 @@
             "name": "milk",
             "type": "grocery",
             "image": "https://via.placeholder.com/150/f66b97",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "pice": 10
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
+            "price": 10
         },
         {
             "id": 6,
             "name": "cheese",
             "type": "grocery",
             "image": "https://via.placeholder.com/150/771796",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "pice": 15
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
+            "price": 15
         },
         {
             "id": 7,
             "name": "wood",
             "type": "grocery",
             "image": "https://via.placeholder.com/150/573796",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "pice": 15
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
+            "price": 15
         },
         {
             "id": 8,
             "name": "coca",
             "type": "drink",
             "image": "https://via.placeholder.com/150/24f355",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "pice": 50
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
+            "price": 50
         },
         {
             "id": 9,
             "name": "wine",
             "type": "drink",
             "image": "https://via.placeholder.com/150/d32776",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "pice": 49
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
+            "price": 49
         }
     ]
 }
