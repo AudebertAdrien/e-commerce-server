@@ -16,6 +16,8 @@ const corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 
+const stripe = require("stripe")(process.env.STRIPE_API_TEST_KEY);
+
 const DATABASE = "items";
 const uri = `mongodb+srv://adrien:${process.env.DB_USER_PASS}@cluster1.lv4ww.mongodb.net/${DATABASE}?retryWrites=true&w=majority`;
 
@@ -34,6 +36,18 @@ client.connect((err) => {
 
 app.get("/", (req, res) => {
   res.status(200).json(datas);
+});
+
+app.post("/cart", async (req, res) => {
+  const value = Object.values(req.body)[0];
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: value,
+    currency: "eur",
+    payment_method_types: ["card"],
+    receipt_email: "adrien66.pub@gmail.com",
+  });
+  console.log(paymentIntent);
+  res.status(200).json(paymentIntent);
 });
 
 module.exports = app;
