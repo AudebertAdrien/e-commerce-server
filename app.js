@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const MongoClient = require("mongodb").MongoClient;
-const datas = require("./fruitAndVegetable.json");
+const datas = require("./animals.json");
 
 const corsOptions = {
   origin: [
@@ -40,6 +40,7 @@ app.get("/", (req, res) => {
 
 app.post("/cart", async (req, res) => {
   const value = Object.values(req.body)[0];
+  console.log(value);
   const paymentIntent = await stripe.paymentIntents.create({
     amount: value,
     currency: "eur",
