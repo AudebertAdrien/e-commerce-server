@@ -2,7 +2,7 @@
     "list": [
         {
             "id": 1,
-            "name": "rocket",
+            "name": "Photo Cameras - exemple name",
             "type": "Photo Cameras",
             "image": "https://my-e-commerce-bucket.s3.eu-west-1.amazonaws.com/Pcamera1.jpg",
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
@@ -10,7 +10,7 @@
         },
         {
             "id": 2,
-            "name": "chips",
+            "name": "Photo Cameras - exemple name",
             "type": "Photo Cameras",
             "image": "https://my-e-commerce-bucket.s3.eu-west-1.amazonaws.com/Pcamera2.jpg",
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
@@ -18,7 +18,7 @@
         },
         {
             "id": 3,
-            "name": "timotet",
+            "name": "Photo Cameras - exemple name",
             "type": "Photo Cameras",
             "image": "https://my-e-commerce-bucket.s3.eu-west-1.amazonaws.com/Pcamera3.jpg",
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
@@ -26,7 +26,7 @@
         },
         {
             "id": 4,
-            "name": "test",
+            "name": "Video Cameras - exemple name",
             "type": "Video Cameras",
             "image": "https://my-e-commerce-bucket.s3.eu-west-1.amazonaws.com/Vcamera3.jpg",
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
@@ -34,7 +34,7 @@
         },
         {
             "id": 5,
-            "name": "Camera name",
+            "name": "Video Cameras - exemple name",
             "type": "Video Cameras",
             "image": "https://my-e-commerce-bucket.s3.eu-west-1.amazonaws.com/Vcamera2.jpg",
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
@@ -42,7 +42,7 @@
         },
         {
             "id": 6,
-            "name": "rosebird",
+            "name": "Microphone - exemple name",
             "type": "Microphone",
             "image": "https://my-e-commerce-bucket.s3.eu-west-1.amazonaws.com/micro1.jpg",
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
@@ -50,7 +50,7 @@
         },
         {
             "id": 7,
-            "name": "whoocare",
+            "name": "Microphone - exemple name",
             "type": "Microphone",
             "image": "https://my-e-commerce-bucket.s3.eu-west-1.amazonaws.com/micro2.jpg",
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
@@ -58,7 +58,7 @@
         },
         {
             "id": 8,
-            "name": "bigA$$",
+            "name": "Lens - exemple name",
             "type": "Lens",
             "image": "https://my-e-commerce-bucket.s3.eu-west-1.amazonaws.com/lens1.jpg",
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
@@ -66,7 +66,7 @@
         },
         {
             "id": 9,
-            "name": "lovemeat",
+            "name": "Lens - exemple name",
             "type": "Lens",
             "image": "https://my-e-commerce-bucket.s3.eu-west-1.amazonaws.com/lens2.jpg",
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
@@ -74,7 +74,7 @@
         },
         {
             "id": 10,
-            "name": "lovemeat",
+            "name": "Action - exemple name",
             "type": "Action Camera",
             "image": "https://my-e-commerce-bucket.s3.eu-west-1.amazonaws.com/action1.jpg",
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
@@ -82,7 +82,7 @@
         },
         {
             "id": 11,
-            "name": "lovemeat",
+            "name": "Action - exemple name",
             "type": "Action Camera",
             "image": "https://my-e-commerce-bucket.s3.eu-west-1.amazonaws.com/action2.jpg",
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
@@ -90,7 +90,7 @@
         },
         {
             "id": 12,
-            "name": "lovemeat",
+            "name": "Action - exemple name",
             "type": "Action Camera",
             "image": "https://my-e-commerce-bucket.s3.eu-west-1.amazonaws.com/action3.jpg",
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing fugit vel magni ipsum maiores, soluta expedita debitis.",
